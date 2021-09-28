@@ -1,0 +1,11 @@
+[Unit]
+Description=Ntp Exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/ntp_exporter -ntp.server={{ ntp01 }} -ntp.server={{ ntp02 }} -ntp.server={{ ntp03 }} -ntp.server={{ ntp04 }}
+
+[Install]
+WantedBy=multi-user.target

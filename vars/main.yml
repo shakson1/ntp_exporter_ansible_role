@@ -1,0 +1,6 @@
+---
+# vars file for ntp_exporter
+ntp01: 0.rhel.pool.ntp.org
+ntp02: 1.rhel.pool.ntp.org
+ntp03: 2.rhel.pool.ntp.org
+ntp04: 3.rhel.pool.ntp.org

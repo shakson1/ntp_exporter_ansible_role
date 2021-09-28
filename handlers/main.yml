@@ -1,0 +1,17 @@
+---
+
+- name: restart ntp_exporter
+  systemd:
+    name: ntp_exporter
+    state: restarted
+    daemon_reload: yes
+
+- name: daemon reload
+  systemd:
+    daemon_reload: yes
+
+- name: restart ntp_exporter
+  systemd:
+    name: ntp_exporter
+    state: restarted
+    daemon_reload: yes

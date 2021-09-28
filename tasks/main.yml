@@ -1,0 +1,3 @@
+---
+# tasks file for ntp_exporter
+- import_tasks: ntp_exporter.yml

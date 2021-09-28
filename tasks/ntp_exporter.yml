@@ -1,0 +1,33 @@
+---
+- name: download ntp_exporter zipped archive
+  get_url:
+    validate_certs: no
+    url: https://github.com/sapcc/ntp_exporter/releases/download/v2.0.1/ntp_exporter-2.0.1-linux-amd64.tar.gz
+    dest: "{{ ansible_env.HOME }}/ntp_exporter-2.0.1-linux-amd64.tar.gz"
+
+- name: extract ntp_exporter zipped archive
+  unarchive:
+    src: "{{ ansible_env.HOME }}/ntp_exporter-2.0.1-linux-amd64.tar.gz"
+    dest: "{{ ansible_env.HOME }}"
+    remote_src: yes
+
+- name: copy ntp_exporter bin file
+  copy:
+    src: "{{ ansible_env.HOME }}/ntp_exporter"
+    dest: /usr/local/bin
+    remote_src: yes
+    mode: preserve
+
+- name: create ntp_exporter service file
+  template:
+    src: templates/ntp_exporter.service.j2
+    dest: /etc/systemd/system/ntp_exporter.service
+  notify:
+    - daemon reload
+    - restart ntp_exporter
+
+- name: start/enable ntp_exporter
+  systemd:
+    name: ntp_exporter
+    state: started
+    enabled: yes
